@@ -13,13 +13,13 @@
 
     <style>
         :root {
-            --primary-color: #e8f4f8;
-            --accent-color: #4dd0e1;
-            /* Novosibirsk冬季：冰蓝色北极光渐变 */
-            --bg-gradient: linear-gradient(135deg, #0a1929 0%, #1a3a52 25%, #2d5f7a 50%, #1a3a52 75%, #0a1929 100%);
-            --aurora-start: rgba(77, 208, 225, 0.3);
-            --aurora-mid: rgba(129, 212, 250, 0.2);
-            --aurora-end: rgba(174, 234, 220, 0.15);
+            --primary-color: #ffeef8;
+            --accent-color: #ff6b9d;
+            /* 温暖粉紫色主题 */
+            --bg-gradient: linear-gradient(135deg, #2d1b4e 0%, #4a2c5e 25%, #6b4c7a 50%, #4a2c5e 75%, #2d1b4e 100%);
+            --aurora-start: rgba(255, 107, 157, 0.25);
+            --aurora-mid: rgba(186, 85, 211, 0.15);
+            --aurora-end: rgba(221, 160, 221, 0.1);
         }
 
         body {
@@ -80,11 +80,11 @@
         .snowflake {
             position: absolute;
             top: -10px;
-            color: #b3e5fc;
+            color: #ffc4e1;
             font-size: 1em;
             opacity: 0.9;
             animation: fall linear infinite;
-            text-shadow: 0 0 5px rgba(129, 212, 250, 0.5);
+            text-shadow: 0 0 5px rgba(255, 182, 193, 0.5);
         }
 
         @keyframes fall {
@@ -102,10 +102,10 @@
         .card {
             position: relative;
             z-index: 10;
-            background: rgba(26, 58, 82, 0.75);
+            background: rgba(74, 44, 94, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 2px solid rgba(77, 208, 225, 0.3);
+            border: 2px solid rgba(255, 107, 157, 0.4);
             border-radius: 20px;
             padding: 50px 45px;
             max-width: 520px;
@@ -113,8 +113,8 @@
             margin: 20px auto;
             text-align: center;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 40px rgba(77, 208, 225, 0.1),
-                inset 0 0 60px rgba(77, 208, 225, 0.05);
+                0 0 40px rgba(255, 107, 157, 0.15),
+                inset 0 0 60px rgba(255, 107, 157, 0.05);
             animation: fadeIn 2s ease-out, cardGlow 4s ease-in-out infinite;
         }
 
@@ -123,14 +123,14 @@
             0%,
             100% {
                 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                    0 0 40px rgba(77, 208, 225, 0.1),
-                    inset 0 0 60px rgba(77, 208, 225, 0.05);
+                    0 0 40px rgba(255, 107, 157, 0.15),
+                    inset 0 0 60px rgba(255, 107, 157, 0.05);
             }
 
             50% {
                 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                    0 0 60px rgba(77, 208, 225, 0.2),
-                    inset 0 0 80px rgba(77, 208, 225, 0.08);
+                    0 0 60px rgba(255, 107, 157, 0.25),
+                    inset 0 0 80px rgba(255, 107, 157, 0.08);
             }
         }
 
@@ -152,8 +152,8 @@
             color: var(--accent-color);
             font-weight: 600;
             line-height: 1.3;
-            text-shadow: 0 0 20px rgba(77, 208, 225, 0.6),
-                0 0 40px rgba(77, 208, 225, 0.3);
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.6),
+                0 0 40px rgba(255, 107, 157, 0.3);
             animation: titleShine 3s ease-in-out infinite;
         }
 
@@ -161,14 +161,14 @@
 
             0%,
             100% {
-                text-shadow: 0 0 20px rgba(77, 208, 225, 0.6),
-                    0 0 40px rgba(77, 208, 225, 0.3);
+                text-shadow: 0 0 20px rgba(255, 107, 157, 0.6),
+                    0 0 40px rgba(255, 107, 157, 0.3);
             }
 
             50% {
-                text-shadow: 0 0 30px rgba(77, 208, 225, 0.8),
-                    0 0 60px rgba(77, 208, 225, 0.4),
-                    0 0 80px rgba(129, 212, 250, 0.2);
+                text-shadow: 0 0 30px rgba(255, 107, 157, 0.8),
+                    0 0 60px rgba(255, 107, 157, 0.5),
+                    0 0 80px rgba(255, 182, 193, 0.3);
             }
         }
 
@@ -179,8 +179,8 @@
             letter-spacing: 3px;
             opacity: 0.9;
             margin-bottom: 35px;
-            color: #81d4fa;
-            text-shadow: 0 0 10px rgba(129, 212, 250, 0.4);
+            color: #ffb6c1;
+            text-shadow: 0 0 10px rgba(255, 182, 193, 0.4);
         }
 
         p {
@@ -194,29 +194,29 @@
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             font-size: 1.5rem;
-            color: #80deea;
+            color: #dda0dd;
             margin: 15px 0;
             display: block;
-            text-shadow: 0 0 15px rgba(128, 222, 234, 0.4);
+            text-shadow: 0 0 15px rgba(221, 160, 221, 0.5);
             font-weight: 600;
         }
 
         .sincere-block {
             font-size: 1.1rem;
             margin-top: 40px;
-            background: rgba(13, 39, 61, 0.6);
+            background: rgba(58, 28, 68, 0.6);
             padding: 25px;
             border-radius: 12px;
             text-align: left;
             border-left: 3px solid var(--accent-color);
-            border-right: 1px solid rgba(77, 208, 225, 0.2);
+            border-right: 1px solid rgba(255, 107, 157, 0.3);
             line-height: 1.7;
-            box-shadow: inset 0 0 30px rgba(77, 208, 225, 0.05);
+            box-shadow: inset 0 0 30px rgba(255, 107, 157, 0.05);
         }
 
         .sincere-block strong {
-            color: #80deea;
-            text-shadow: 0 0 8px rgba(128, 222, 234, 0.3);
+            color: #dda0dd;
+            text-shadow: 0 0 8px rgba(221, 160, 221, 0.4);
         }
 
         .signature {
