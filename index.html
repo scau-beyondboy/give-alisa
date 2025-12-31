@@ -25,8 +25,9 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
             background: var(--bg-gradient);
             font-family: 'Cormorant Garamond', serif;
             display: flex;
@@ -34,6 +35,7 @@
             align-items: center;
             color: var(--primary-color);
             position: relative;
+            padding: 20px 0;
         }
 
         /* 北极光效果 */
@@ -107,7 +109,8 @@
             border-radius: 20px;
             padding: 50px 45px;
             max-width: 520px;
-            width: 85%;
+            width: 90%;
+            margin: 20px auto;
             text-align: center;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
                 0 0 40px rgba(77, 208, 225, 0.1),
@@ -246,6 +249,33 @@
 
 <body>
 
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="videoplayback.mp4" type="audio/mp4">
+    </audio>
+
+    <!-- Music Control Button -->
+    <button id="musicToggle" style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+        background: rgba(77, 208, 225, 0.2);
+        border: 2px solid rgba(77, 208, 225, 0.5);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #4dd0e1;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3);
+    " onmouseover="this.style.background='rgba(77, 208, 225, 0.3)'"
+        onmouseout="this.style.background='rgba(77, 208, 225, 0.2)'">
+        🔊
+    </button>
+
     <div class="snow-container" id="snow"></div>
 
     <div class="card">
@@ -303,6 +333,53 @@
             }
         }
         createSnow();
+
+        // Background Music Control
+        const music = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', function () {
+            if (isPlaying) {
+                music.pause();
+                musicToggle.textContent = '🔇';
+                isPlaying = false;
+            } else {
+                music.play().catch(e => console.log('Autoplay prevented:', e));
+                musicToggle.textContent = '🔊';
+                isPlaying = true;
+            }
+        });
+
+        // Try to autoplay on page load (may be blocked by browser)
+        window.addEventListener('load', function () {
+            music.volume = 0.3; // Set volume to 30%
+            music.play().then(() => {
+                isPlaying = true;
+                musicToggle.textContent = '🔊';
+            }).catch(e => {
+                console.log('Autoplay blocked. Click the button to play music.');
+                musicToggle.textContent = '🔇';
+                // Add a pulsing animation to draw attention
+                musicToggle.style.animation = 'pulse 2s ease-in-out infinite';
+            });
+        });
+
+        // Add pulse animation for the button
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { 
+                    transform: scale(1);
+                    box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3);
+                }
+                50% { 
+                    transform: scale(1.1);
+                    box-shadow: 0 6px 20px rgba(77, 208, 225, 0.5);
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 
