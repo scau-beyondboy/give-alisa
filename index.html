@@ -250,6 +250,9 @@
 <body>
 
     <!-- Background Music -->
+    <audio id="firstMusic">
+        <source src="blessing.m4a" type="audio/mp4">
+    </audio>
     <audio id="bgMusic" loop>
         <source src="videoplayback.mp4" type="audio/mp4">
     </audio>
@@ -298,7 +301,7 @@
 
         <!-- 3. 新年祝福与友谊 -->
         <div class="sincere-block">
-            Пусть новый год принесёт тебе много <strong>радости</strong>, <strong>вдохновения</strong> и новых открытий
+            Пусть новый год принесёт тебе много радости, вдохновения и новых открытий
             в учёбе.
             <br><br>
             Очень рад познакомиться с тобой. Желаю тебе успехов в учёбе и всего самого наилучшего!
@@ -334,35 +337,56 @@
         }
         createSnow();
 
-        // Background Music Control
+        // Background Music Control - Sequential Playback
+        const firstMusic = document.getElementById('firstMusic');
         const music = document.getElementById('bgMusic');
         const musicToggle = document.getElementById('musicToggle');
         let isPlaying = false;
+        let isFirstMusicPlaying = true;
+
+        // When first music ends, play the second music
+        firstMusic.addEventListener('ended', function () {
+            isFirstMusicPlaying = false;
+            music.play().catch(e => console.log('Second music play prevented:', e));
+        });
 
         musicToggle.addEventListener('click', function () {
             if (isPlaying) {
-                music.pause();
+                if (isFirstMusicPlaying) {
+                    firstMusic.pause();
+                } else {
+                    music.pause();
+                }
                 musicToggle.textContent = '🔇';
                 isPlaying = false;
             } else {
-                music.play().catch(e => console.log('Autoplay prevented:', e));
+                if (isFirstMusicPlaying) {
+                    firstMusic.play().catch(e => console.log('Autoplay prevented:', e));
+                } else {
+                    music.play().catch(e => console.log('Autoplay prevented:', e));
+                }
                 musicToggle.textContent = '🔊';
                 isPlaying = true;
             }
         });
 
-        // Try to autoplay on page load (may be blocked by browser)
+        // Try to autoplay on page load with 10s delay (may be blocked by browser)
         window.addEventListener('load', function () {
+            firstMusic.volume = 0.3; // Set volume to 30%
             music.volume = 0.3; // Set volume to 30%
-            music.play().then(() => {
-                isPlaying = true;
-                musicToggle.textContent = '🔊';
-            }).catch(e => {
-                console.log('Autoplay blocked. Click the button to play music.');
-                musicToggle.textContent = '🔇';
-                // Add a pulsing animation to draw attention
-                musicToggle.style.animation = 'pulse 2s ease-in-out infinite';
-            });
+
+            // Delay 10 seconds before playing first music
+            setTimeout(function () {
+                firstMusic.play().then(() => {
+                    isPlaying = true;
+                    musicToggle.textContent = '🔊';
+                }).catch(e => {
+                    console.log('Autoplay blocked. Click the button to play music.');
+                    musicToggle.textContent = '🔇';
+                    // Add a pulsing animation to draw attention
+                    musicToggle.style.animation = 'pulse 2s ease-in-out infinite';
+                });
+            }, 6000); // 10 seconds delay
         });
 
         // Add pulse animation for the button
